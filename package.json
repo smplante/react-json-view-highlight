@@ -1,6 +1,6 @@
 {
-    "name": "react-json-view",
-    "description": "Interactive react component for displaying javascript arrays and JSON objects.",
+    "name": "react-json-view-highlight",
+    "description": "Interactive react component for displaying javascript arrays and JSON objects, with the ability to highlight portions of the JSON objects.",
     "version": "1.21.3",
     "main": "dist/main.js",
     "dependencies": {
@@ -68,7 +68,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/mac-s-g/react-json-view.git"
+        "url": "https://github.com/smplante/react-json-view-highlight.git"
     },
     "keywords": [
         "array-viewer",
@@ -93,11 +93,20 @@
         "treeview"
     ],
     "license": "MIT",
-    "author": "Mac Gainor",
-    "bugs": {
-        "url": "https://github.com/mac-s-g/react-json-view/issues"
+    "author": {
+        "name": "Sascha Plante",
+        "url": "https://github.com/smplante/react-json-view-highlight"
     },
-    "homepage": "https://github.com/mac-s-g/react-json-view",
+    "contributors": [
+        {
+            "name": "Mac Gainor",
+            "url": "https://github.com/mac-s-g/react-json-view"
+        }
+    ],
+    "bugs": {
+        "url": "https://github.com/smplante/react-json-view-highlight/issues"
+    },
+    "homepage": "https://github.com/smplante/react-json-view-highlight",
     "directories": {
         "docs": "docs",
         "test": "test"

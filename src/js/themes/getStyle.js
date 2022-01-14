@@ -1,6 +1,7 @@
 import { rjv_default, rjv_grey } from './base16/rjv-themes';
 import constants from './styleConstants';
 import { createStyling } from 'react-base16-styling';
+import * as base16 from 'base16';
 
 const colorMap = theme => ({
     backgroundColor: theme.base00,
@@ -399,6 +400,15 @@ const getStyle = theme => {
         theme
     );
 };
+
+export const getTheme = theme => {
+    let rjv_theme = rjv_default;
+    if (theme === false || theme === 'none') {
+        rjv_theme = rjv_grey;
+    }
+
+    return base16[theme] ? base16[theme] : rjv_theme
+}
 
 export default function style(theme, component, args) {
     if (!theme) {

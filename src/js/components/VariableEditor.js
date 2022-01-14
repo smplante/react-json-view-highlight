@@ -1,7 +1,6 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 
-import { toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
@@ -25,7 +24,7 @@ import {
 import { Edit, CheckCircle, RemoveCircle as Remove } from './icons';
 
 //theme
-import Theme from './../themes/getStyle';
+import Theme, { getTheme } from './../themes/getStyle';
 
 class VariableEditor extends React.PureComponent {
     constructor(props) {
@@ -55,13 +54,24 @@ class VariableEditor extends React.PureComponent {
             onDelete,
             onSelect,
             displayArrayKey,
-            quotesOnKeys
+            quotesOnKeys,
+            highlight
         } = this.props;
         const { editMode } = this.state;
+
+        const styles = {}
+        if (highlight && namespace) {
+            const highlightPath = Array.isArray(namespace) ? `${namespace.join("/")}/${variable.name}` : namespace
+            if (highlightPath && Object.keys(highlight).includes(highlightPath)) {
+                styles.backgroundColor = highlight[highlightPath] ? highlight[highlightPath] : getTheme(theme).base02
+            }
+        }
+
         return (
             <div
                 {...Theme(theme, 'objectKeyVal', {
-                    paddingLeft: indentWidth * singleIndent
+                    paddingLeft: indentWidth * singleIndent,
+                    ...styles
                 })}
                 onMouseEnter={() =>
                     this.setState({ ...this.state, hovered: true })

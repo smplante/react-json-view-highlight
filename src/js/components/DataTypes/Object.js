@@ -17,7 +17,7 @@ import AttributeStore from './../../stores/ObjectAttributes';
 import { CollapsedIcon, ExpandedIcon } from './../ToggleIcons';
 
 //theme
-import Theme from './../../themes/getStyle';
+import Theme, { getTheme } from './../../themes/getStyle';
 
 //increment 1 with each nested object & array
 const DEPTH_INCREMENT = 1;
@@ -190,6 +190,7 @@ class RjvObject extends React.PureComponent {
             theme,
             jsvRoot,
             iconStyle,
+            highlight,
             ...rest
         } = this.props;
 
@@ -201,6 +202,13 @@ class RjvObject extends React.PureComponent {
         } else if (parent_type === 'array_group') {
             styles.borderLeft = 0;
             styles.display = 'inline';
+        }
+
+        if (highlight && namespace) {
+            const highlightPath = Array.isArray(namespace) ? namespace.join("/") : namespace
+            if (highlightPath && Object.keys(highlight).includes(highlightPath)) {
+                styles.backgroundColor = highlight[highlightPath] ? highlight[highlightPath] : getTheme(theme).base02
+            }
         }
 
         return (
@@ -219,6 +227,7 @@ class RjvObject extends React.PureComponent {
                     ? this.getObjectContent(depth, src, {
                           theme,
                           iconStyle,
+                          highlight,
                           ...rest
                       })
                     : this.getEllipsis()}

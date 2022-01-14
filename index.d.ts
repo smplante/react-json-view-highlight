@@ -138,6 +138,12 @@ export interface ReactJsonViewProps {
   /**
    * Set to a value to be used as defaultValue when adding new key to json
    *
+   * Default: {}
+   */
+  highlight?: object;
+  /**
+   * Set to a value to be used as defaultValue when adding new key to json
+   *
    * Default: null
    */
   defaultValue?: TypeDefaultValue | TypeDefaultValue[] | null;

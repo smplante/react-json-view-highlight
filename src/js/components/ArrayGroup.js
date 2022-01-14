@@ -1,5 +1,5 @@
 import React from 'react';
-import Theme from './../themes/getStyle';
+import Theme, { getTheme } from './../themes/getStyle';
 
 import VariableMeta from './VariableMeta';
 import ObjectName from './ObjectName';
@@ -50,6 +50,7 @@ export default class extends React.PureComponent {
             jsvRoot,
             namespace,
             parent_type,
+            highlight,
             ...rest
         } = this.props;
 
@@ -64,11 +65,20 @@ export default class extends React.PureComponent {
         const size = groupArraysAfterLength;
         const groups = Math.ceil(src.length / size);
 
+        const styles = {}
+        if (highlight && namespace) {
+            const highlightPath = Array.isArray(namespace) ? namespace.join("/") : namespace
+            if (highlightPath && Object.keys(highlight).includes(highlightPath)) {
+                styles.backgroundColor = highlight[highlightPath] ? highlight[highlightPath] : getTheme(theme).base02
+            }
+        }
+
         return (
             <div
                 class="object-key-val"
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {
-                    paddingLeft: object_padding_left
+                    paddingLeft: object_padding_left,
+                    ...styles
                 })}
             >
                 <ObjectName {...this.props} />
@@ -108,6 +118,7 @@ export default class extends React.PureComponent {
                                     type="array"
                                     parent_type="array_group"
                                     theme={theme}
+                                    highlight={highlight}
                                     {...rest}
                                 />
                             ) : (
